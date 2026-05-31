@@ -179,6 +179,32 @@ async function renderLogs() {
   terminal.scrollTop = terminal.scrollHeight;
 }
 
+async function downloadLogs(format) {
+  const query =
+    format === 'csv'
+      ? 'format=csv'
+      : 'format=json&download=true';
+  const response = await fetch(`/logs?${query}`, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    showApiError(data.error?.detail || 'Log export failed');
+    throw new Error('Log export failed');
+  }
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = format === 'csv' ? 'printer-logs.csv' : 'printer-logs.json';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
 async function refresh() {
   try {
     const status = await api('/status');
@@ -282,6 +308,14 @@ document.getElementById('printVoucher').addEventListener('click', () =>
       }),
     });
   }),
+);
+
+document.getElementById('exportLogsCsv').addEventListener('click', () =>
+  runAction(() => downloadLogs('csv')),
+);
+
+document.getElementById('exportLogsJson').addEventListener('click', () =>
+  runAction(() => downloadLogs('json')),
 );
 
 refresh();

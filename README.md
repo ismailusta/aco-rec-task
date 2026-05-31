@@ -24,7 +24,8 @@ Mock thermal printer service for the ACO Recycling technical assignment. Simulat
 - Dashboard UI at `http://localhost:3000`
 - Job queue with idempotency by `jobId`
 - `GET /health`
-- CSV log export: `GET /logs?format=csv`
+- CSV log export: `GET /logs?format=csv` or **Export CSV** button in dashboard
+- JSON log export: `GET /logs?format=json&download=true` or **Export JSON** button in dashboard
 - Optional API token auth
 - Docker support
 - ETA estimate and paper roll percentage in `/status`
@@ -178,7 +179,7 @@ Manual test steps: see [`TEST_SCENARIOS.md`](TEST_SCENARIOS.md).
 | POST | `/print/text` | Print text or structured receipt |
 | POST | `/print/image` | Print base64 image |
 | GET | `/status` | Connection, hardware, queue, failed jobs |
-| GET | `/logs` | JSON logs (`?format=csv` for CSV) |
+| GET | `/logs` | JSON logs; `?format=csv` downloads CSV; `?download=true` downloads JSON file |
 | POST | `/reprint` | Reprint failed job `{ "jobId": "..." }` |
 | GET | `/health` | Service health (bonus) |
 | POST | `/simulate/error` | Force hardware error (demo) |
@@ -230,6 +231,18 @@ Reprint failed job:
 curl -X POST http://localhost:3000/reprint \
   -H "Content-Type: application/json" \
   -d "{\"jobId\":\"voucher-demo\"}"
+```
+
+Export logs as CSV:
+
+```bash
+curl -O -J http://localhost:3000/logs?format=csv
+```
+
+Export logs as JSON file:
+
+```bash
+curl -O -J "http://localhost:3000/logs?format=json&download=true"
 ```
 
 ## Idempotency
@@ -301,7 +314,8 @@ ACO Recycling teknik ödevi için termal yazıcı mock servisi. USB/LAN bağlant
 - `http://localhost:3000` adresinde dashboard UI
 - `jobId` ile idempotency destekli iş kuyruğu
 - `GET /health`
-- CSV log dışa aktarma: `GET /logs?format=csv`
+- CSV log dışa aktarma: `GET /logs?format=csv` veya dashboard'da **Export CSV** butonu
+- JSON log dışa aktarma: `GET /logs?format=json&download=true` veya dashboard'da **Export JSON** butonu
 - Opsiyonel API token kimlik doğrulama
 - Docker desteği
 - `/status` içinde ETA tahmini ve kağıt rulo yüzdesi
@@ -461,7 +475,7 @@ Manuel test adımları: [`TEST_SCENARIOS.md`](TEST_SCENARIOS.md)
 | POST | `/print/text` | Metin veya yapılandırılmış fiş bas |
 | POST | `/print/image` | Base64 görsel bas |
 | GET | `/status` | Bağlantı, donanım, kuyruk, başarısız işler |
-| GET | `/logs` | JSON loglar (`?format=csv` ile CSV) |
+| GET | `/logs` | JSON loglar; `?format=csv` CSV indirir; `?download=true` JSON dosyası indirir |
 | POST | `/reprint` | Başarısız işi tekrar bas `{ "jobId": "..." }` |
 | GET | `/health` | Servis sağlığı (bonus) |
 | POST | `/simulate/error` | Donanım hatası simüle et (demo) |
@@ -513,6 +527,18 @@ Başarısız işi tekrar bas:
 curl -X POST http://localhost:3000/reprint \
   -H "Content-Type: application/json" \
   -d "{\"jobId\":\"voucher-demo\"}"
+```
+
+Logları CSV olarak indir:
+
+```bash
+curl -O -J http://localhost:3000/logs?format=csv
+```
+
+Logları JSON dosyası olarak indir:
+
+```bash
+curl -O -J "http://localhost:3000/logs?format=json&download=true"
 ```
 
 PowerShell alternatifi:

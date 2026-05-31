@@ -118,6 +118,24 @@ body {
   font-size: 1rem;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.section-header .button-row {
+  margin-bottom: 0;
+}
+
 .button-row {
   display: flex;
   flex-wrap: wrap;

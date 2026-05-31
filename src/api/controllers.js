@@ -92,14 +92,23 @@ export function createControllers(services) {
 
     logs(req, res) {
       const format = req.query.format || 'json';
+      const download = req.query.download === '1' || req.query.download === 'true';
 
       if (format === 'csv') {
-        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
         res.setHeader(
           'Content-Disposition',
           'attachment; filename="printer-logs.csv"',
         );
         return res.send(logger.toCsv());
+      }
+
+      if (download) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader(
+          'Content-Disposition',
+          'attachment; filename="printer-logs.json"',
+        );
       }
 
       return res.json(logger.getAll());
