@@ -1,0 +1,17 @@
+{
+  "jobId": "voucher-001",
+  "lang": "tr",
+  "receipt": {
+    "machineId": "ACO-TEST-0001-0001",
+    "rewardType": "Aco Recycling Default Reward",
+    "totalReward": 3.0,
+    "currency": "TRY",
+    "items": [
+      { "product": "Glass", "quantity": 0, "reward": 0 },
+      { "product": "Plastic", "quantity": 2, "reward": 2 },
+      { "product": "Metal", "quantity": 1, "reward": 1 },
+      { "product": "Tetrapak", "quantity": 0, "reward": 0 }
+    ],
+    "qrPayload": "voucher-001"
+  }
+}

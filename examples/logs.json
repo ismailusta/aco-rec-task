@@ -1,0 +1,45 @@
+[
+  {
+    "ts": "2025-10-02T12:34:50Z",
+    "op": "connect",
+    "conn": "usb",
+    "jobId": null,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "ts": "2025-10-02T12:34:52Z",
+    "op": "print_image",
+    "conn": "usb",
+    "jobId": "voucher-demo",
+    "status": "ok",
+    "error": null
+  },
+  {
+    "ts": "2025-10-02T12:34:56Z",
+    "op": "print_image",
+    "conn": "usb",
+    "jobId": "voucher-demo-2",
+    "status": "error",
+    "error": {
+      "code": "PAPER_OUT",
+      "detail": "No paper detected"
+    }
+  },
+  {
+    "ts": "2025-10-02T12:35:01Z",
+    "op": "reprint",
+    "conn": "usb",
+    "jobId": "voucher-demo-2-reprint-1727870101000",
+    "status": "ok",
+    "error": null
+  },
+  {
+    "ts": "2025-10-02T12:35:05Z",
+    "op": "print_text",
+    "conn": "usb",
+    "jobId": "receipt-001",
+    "status": "ok",
+    "error": null
+  }
+]

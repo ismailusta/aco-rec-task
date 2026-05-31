@@ -1,0 +1,90 @@
+{
+  "info": {
+    "name": "ACO Thermal Printer Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Connect USB",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"mode\": \"usb\"\n}"
+        },
+        "url": "{{baseUrl}}/connect"
+      }
+    },
+    {
+      "name": "Print Text",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobId\": \"postman-text-1\",\n  \"text\": \"Test fiş\",\n  \"lang\": \"tr\"\n}"
+        },
+        "url": "{{baseUrl}}/print/text"
+      }
+    },
+    {
+      "name": "Print Receipt",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobId\": \"postman-receipt-1\",\n  \"lang\": \"tr\",\n  \"receipt\": {\n    \"machineId\": \"ACO-TEST-0001-0001\",\n    \"rewardType\": \"Aco Recycling Default Reward\",\n    \"totalReward\": 3.0,\n    \"currency\": \"TRY\",\n    \"items\": [\n      { \"product\": \"Plastic\", \"quantity\": 2, \"reward\": 2 },\n      { \"product\": \"Metal\", \"quantity\": 1, \"reward\": 1 }\n    ],\n    \"qrPayload\": \"voucher-001\"\n  }\n}"
+        },
+        "url": "{{baseUrl}}/print/text"
+      }
+    },
+    {
+      "name": "Status",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/status"
+      }
+    },
+    {
+      "name": "Logs JSON",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/logs"
+      }
+    },
+    {
+      "name": "Logs CSV",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/logs?format=csv"
+      }
+    },
+    {
+      "name": "Reprint",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobId\": \"fail-img-1\"\n}"
+        },
+        "url": "{{baseUrl}}/reprint"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

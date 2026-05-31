@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACO Thermal Printer Control Panel</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>ACO Thermal Printer</h1>
+      <p class="subtitle">Mock printer control panel</p>
+    </div>
+    <div id="connectionIndicator" class="connection-indicator disconnected">
+      <span class="dot"></span>
+      <span id="connectionLabel">Disconnected</span>
+    </div>
+  </header>
+
+  <div id="errorBanner" class="error-banner hidden">
+    <span id="errorBannerText"></span>
+    <button id="dismissBanner" type="button" aria-label="Dismiss">×</button>
+  </div>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Connection</h2>
+      <div class="button-row">
+        <button id="connectUsb" type="button">Connect USB</button>
+        <button id="connectLan" type="button">Connect LAN</button>
+        <button id="simulateJam" type="button" class="danger">Simulate Paper Jam</button>
+        <button id="clearError" type="button">Clear Error</button>
+      </div>
+      <dl class="status-list" id="hardwareStatus"></dl>
+    </section>
+
+    <section class="card">
+      <h2>Quick Print</h2>
+      <form id="printTextForm">
+        <label>
+          Text
+          <textarea id="printText" rows="3">Test fiş - ACO Recycling</textarea>
+        </label>
+        <label>
+          Language
+          <select id="printLang">
+            <option value="tr">Türkçe</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+        <button type="submit">Print Text</button>
+      </form>
+      <div class="button-row">
+        <button id="printReceipt" type="button">Print Sample Receipt</button>
+        <button id="printVoucher" type="button">Print Voucher Image</button>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Queue</h2>
+      <div id="queueSummary" class="queue-summary"></div>
+      <table>
+        <thead>
+          <tr>
+            <th>Job ID</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Error</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="queueBody"></tbody>
+      </table>
+    </section>
+
+    <section class="card wide">
+      <h2>Failed Jobs</h2>
+      <div id="failedJobs" class="failed-jobs"></div>
+    </section>
+
+    <section class="card wide">
+      <h2>Live Logs</h2>
+      <pre id="logTerminal" class="log-terminal"></pre>
+    </section>
+  </main>
+
+  <script src="/config.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
